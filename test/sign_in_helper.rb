@@ -14,8 +14,9 @@ module SignInHelper
     when respond_to?(:get)
       get "/auth/github/callback"
     else
-      raise NoImplementedError.new
+      raise NotImplementedError.new
     end
+    @current_user = user
   end
 
   def current_user
@@ -23,6 +24,6 @@ module SignInHelper
   end
 end
 
-class ActionDispatch::IntegrationTest
-  include SignInHelper
+class ActionDispatch::IntegrationTest #((2))
+  include SignInHelper #((3))
 end

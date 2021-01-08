@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def logged_in?
-    !!session[:user_id]
+    !!current_user
   end
 
   def current_user
@@ -16,14 +16,5 @@ class ApplicationController < ActionController::Base
   def authenticate
     return if logged_in?
     redirect_to root_path, alert: "ログインしてください"
-  end
-
-  def error404(e)
-    render "error404", status: 404, formats: [:html]
-  end
-
-  def error500(e)
-    logger.error [e, *e.backtrace].join("\n")
-    render "error500", status: 500, formats: [:html]
   end
 end
